@@ -2,8 +2,8 @@ name: Send Daily LeetCode Problems
 
 on:
   schedule:
-    # Run every day at 2:58 PM UTC (convert your timezone if needed)
-    - cron: "58 14 * * *"
+    # Run every day at 6:20 PM UTC (9:20 PM EAT)
+    - cron: "21 18 * * *"
 
 jobs:
   send_email:
