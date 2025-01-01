@@ -4,30 +4,38 @@ on:
   schedule:
     # Run every 10 minutes
     - cron: "*/10 * * * *"
-  workflow_dispatch:
+  workflow_dispatch:  # Allow manual triggering of the workflow from GitHub UI
 
 jobs:
   update-readme:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
 
     steps:
+      # Step 1: Checkout the repository
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3  # Pulls the repository to the runner
 
+      # Step 2: Set up Python (You may need this if your script uses Python)
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.9"  # Use the required Python version
+          python-version: "3.9"  # Use the required Python version for your script
 
+      # Step 3: Run the Python script to update the streak in README.md
       - name: Run Streak Update Script
-        run: python update_streak.py
+        run: python update_streak.py  # This assumes you have the `update_streak.py` script in your repo
 
+      # Step 4: Pull latest changes from the repository before committing
+      - name: Pull latest changes
+        run: git pull origin main  # Pull the latest changes from the `main` branch (adjust if necessary)
+
+      # Step 5: Commit and Push changes to the repository
       - name: Commit and Push Changes
         run: |
-          git config --local user.name "github-actions[bot]"
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git add README.md
-          git commit -m "Update streak in README"
-          git push
+          git config --local user.name "github-actions[bot]"  # Set up bot user details
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"  # Set up bot email
+          git add README.md  # Add the updated README file
+          git commit -m "Update streak in README"  # Commit the changes
+          git push origin main  # Push the commit to the `main` branch (adjust if necessary)
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use GitHub token to authenticate the push
