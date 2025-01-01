@@ -1,0 +1,3 @@
+# approach
+class SOlution:
+    pass
