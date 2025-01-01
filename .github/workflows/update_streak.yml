@@ -18,9 +18,6 @@ jobs:
         with:
           python-version: "3.9"  # Use the required Python version
 
-      - name: Install Dependencies
-        run: pip install -r requirements.txt
-
       - name: Run Streak Update Script
         run: python streak_update.py
 
