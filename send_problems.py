@@ -21,7 +21,7 @@ EXCEL_FILE = "leetcode_problems.xlsx"
 data = pd.read_excel(EXCEL_FILE)
 
 # Start date
-START_DATE = datetime(2024, 11, 30)  # Your starting date
+START_DATE = datetime(2023, 1, 1)  # Your starting date
 
 # Quotes for each day of the week
 quotes = {
@@ -108,7 +108,7 @@ def send_email(name, email, day_number, problem1_title, problem1_link, problem2_
                         <td style="border: 1px solid #ddd; padding: 8px;">{problem2_title}</td>
                         <td style="border: 1px solid #ddd; padding: 8px;">
                             <a href="{problem2_link}" style="color: #1E90FF;">{problem2_link}</a>
-                        </td>
+                        
                     </tr>
                 </tbody>
             </table>
@@ -143,11 +143,15 @@ def send_email(name, email, day_number, problem1_title, problem1_link, problem2_
         print(f"\u274C Failed to send email for {name} (Day {day_number}): {e}")
 
 # Select problems for the current day
+# Select problems for the current day
 def get_daily_problems(data, day_number):
     # Use modulo to loop back if the day number exceeds the total rows
     problem1_row = data.iloc[(2 * (day_number - 1)) % len(data)]
-    problem2_row = data.iloc[(2 * (day_number - 1)) % len(data)]
-    return format_problem_title(problem1_row['DSA']), problem1_row['DSA'], format_problem_title(problem2_row['DP']), problem2_row['DP']
+    problem2_row = data.iloc[(2 * (day_number - 1) + 1) % len(data)]  # Offset by 1 for the second problem
+    return (
+        format_problem_title(problem1_row['DSA']), problem1_row['DSA'], 
+        format_problem_title(problem2_row['DP']), problem2_row['DP']
+    )
 
 # Main execution
 if __name__ == "__main__":
