@@ -20,7 +20,7 @@ jobs:
           python-version: "3.9"  # Use the required Python version
 
       - name: Run Streak Update Script
-        run: python streak_update.py
+        run: python update_streak.py
 
       - name: Commit and Push Changes
         run: |
