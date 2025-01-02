@@ -74,6 +74,7 @@ def get_motivational_quote():
     weekday = today.strftime("%A")  # Get the current weekday (e.g., Monday, Tuesday)
     return random.choice(quotes[weekday])  # Randomly pick a quote for the current weekday
 
+
 # Function to format the problem title from its link
 def format_problem_title(link):
     title = link.split('/')[-1].replace('-', ' ').title()
