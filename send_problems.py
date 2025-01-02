@@ -21,7 +21,7 @@ EXCEL_FILE = "leetcode_problems.xlsx"
 data = pd.read_excel(EXCEL_FILE)
 
 # Start date
-START_DATE = datetime(2023, 1, 1)  # Your starting date
+START_DATE = datetime(2025, 1, 1)  # Your starting date
 
 # Quotes for each day of the week
 quotes = {
@@ -77,7 +77,7 @@ def get_motivational_quote():
 
 # Function to format the problem title from its link
 def format_problem_title(link):
-    title = link.split('/')[-1].replace('-', ' ').title()
+    title = str(link).split('/')[-1].replace('-', ' ').title()
     return title
 
 # Function to send personalized email
